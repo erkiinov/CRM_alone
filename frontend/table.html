@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %} Clients-table {% endblock %}
+{% block content %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">№</th>
+            <th scope="col">Client Name</th>
+            <th scope="col">Order Name</th>
+            <th scope="col">Seamstress</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for client in clients  %}
+          <tr>
+            <th scope="row">{{ client.pk }}</th>
+            <td> <a href="{% url 'client:user-info' client.pk %}"> {{client.first_name}} {{client.second_name}} </a> </td>
+            <td>{{client.order_name}}</td>
+            <td>{{client.seamstress}}</td>
+            <td>{{client.order_time}}</td>
+            <td>{{client.total}}</td>
+
+            {% endfor %}
+        </tbody>
+    </table>
+  {% endblock %}
+
+</html>

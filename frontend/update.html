@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} update-user {% endblock %}
+
+{% block content %}
+
+    <section class="text-gray-600 body-font overflow-hidden">
+    <button class="inline-flex items-center bg-blue-300 border-0 py-1 px-3 focus:outline-none hover:bg-blue-200 rounded text-base mt-4 md:mt-0" style="margin-top: 20px"> <a href=" /clients/"> Back </a>
+    </button>
+    <div class="container px-5 py-24 mx-auto">
+    <div class="lg:w-4/5 mx-auto flex flex-wrap">
+      <img src="{% static 'img/erkinov-logo.png' %}" style="width: 320px; height: 350px; margin-top: 100px;" alt="ecommerce">
+
+      <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
+        <h2 class="text-sm title-font text-gray-500 tracking-widest">Flash Academy</h2>
+        <h1 class="text-gray-900 text-3xl title-font font-medium mb-4">Student of TIUE</h1>
+        <div class="flex mb-4">
+          <a href="{% url 'client:user-info' client.pk %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
+            Informations
+          </a>
+          <a class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
+            Reviews
+          </a>
+          <a href="{% url 'client:update-user' client.pk %}" class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">
+            Edit
+          </a>
+        </div>
+        <form method="post">
+          <div class="update-button"><button type="submit" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Update</button></div>
+            <p>
+            {% csrf_token %} 
+
+        <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+          <span class="text-gray-500"> {{ client.models }} </pan>
+          <span class="leading-relaxed mb-4" style="margin-left:0%">{{ form.as_p }}</pan>
+        </div>     
+            <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"><a href="{% url 'client:delete-user' client.pk %}">  <h2> Delete</h2> </a></button>
+        </form>
+      </div>
+    
+    </div>
+    </div>
+    </section>   
+
+{% endblock %}

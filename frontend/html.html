@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} Mijoz yaratish {% endblock %}
+
+{% block content %}
+
+    <button class="inline-flex items-center bg-blue-300 border-0 py-1 px-3 focus:outline-none hover:bg-blue-200 rounded text-base mt-4 md:mt-0" style="margin-right: 20px"> <a href=" /clients/"> Back </a>
+    </button>
+    <div style="margin-left: 400px; font-size: 30px; font-family: Arial, Helvetica, sans-serif;" ><h1>Creating Client</h1></div>
+    <form method="post">
+        {% csrf_token %}
+    
+        <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+            <span class="text-gray-500"></pan>
+            <span class="leading-relaxed mb-4" style="margin-left: 0%"> <div class="add_list"> {{ form.as_p }} </div> </pan>
+        </div> 
+    
+          <button style="margin: auto;" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">  <h2> Send</h2> </button>
+    </form>
+{% endblock %}
