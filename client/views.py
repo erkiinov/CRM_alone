@@ -2,8 +2,8 @@ from multiprocessing import context
 from multiprocessing.connection import Client
 from re import template
 from turtle import update
-from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, ListView, DetailView, CreateView
+from django.shortcuts import render, redirect, reverse
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from . import models
 from .forms import *
 import client
@@ -30,36 +30,31 @@ def table(request):
     }       
     return render(request, "table.html", context)
    
+class CliendCreateView(CreateView):
+    template_name = "clients/create.html"
+    form_class = ClientModelForm
 
-def create_client(request):
-    forms = ClientModelForm()
-    if request.method == "POST":
-        form = ClientModelForm(request.POST)
-        if form.is_valid():
-            form.save()
+    def get_success_url(self):
+        return reverse("client:clients-list")
 
-            return redirect('/clients/')
 
-    context = {
-        'forms': forms,
-    }
-    return render(request, "html.html", context)
 
-def client_update(request, pk):
-    client = Client.objects.get(id=pk)
-    form = ClientModelForm(instance=client)
-    if request.method == "POST":
-        form = ClientModelForm(request.POST, instance=client)
-        if form.is_valid():
-            form.save()
-            return redirect("/clients")  
-    context = {
-        'form':form,
-        'client':client
-    }
-    return render(request, 'update.html', context)
+class ClientUpdateView(UpdateView):
+    template_name = "clients/update.html"
+    form_class = ClientModelForm
+    queryset = models.Client.objects.all()
 
-def client_delete(request, pk):
-    client = Client.objects.get(id=pk)
-    client.delete()
-    return redirect("/clients/")
+    def get_success_url(self):
+        return reverse("client:clients-list")
+
+
+class ClientDeleteView(DeleteView):
+    template_name = "clients/delete.html"
+    form_class = ClientModelForm
+    queryset = models.Client.objects.all()
+
+    def get_success_url(self):
+        return reverse("client:clients-list")
+    
+
+    
