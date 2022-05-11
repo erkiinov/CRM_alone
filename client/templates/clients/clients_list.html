@@ -5,7 +5,14 @@
 {% block title %} Clients {% endblock %}
 
 {% block content %}
-
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <form class="d-flex">
+      <input class="inline-flex items-center bg-blue-100 border-0 py-1 px-3 focus:outline-none hover:bg-blue-200 rounded text-base mt-4 md:mt-0" name="q" type="search" placeholder="Search" aria-label="Search">
+      <button class="inline-flex items-center bg-blue-300 border-0 py-1 px-3 focus:outline-none hover:bg-blue-200 rounded text-base mt-4 md:mt-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
     <ul>
         <section class="text-gray-600 body-font">
             <div class="container px-5 py-24 mx-auto flex flex-wrap">
