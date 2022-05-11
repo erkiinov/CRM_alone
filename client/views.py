@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect, reverse
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from . import models
 from .forms import *
-import client
+from django.contrib.auth.mixins import LoginRequiredMixin 
 from .models import Client
 from django.db.models import Q
 
@@ -23,24 +23,18 @@ class SignupView(CreateView):
 class HomeView(TemplateView):
     template_name = "main.html"
 
-class ListsView(ListView):
+class ListsView(LoginRequiredMixin, ListView):
     template_name = "clients/clients_list.html"
     queryset = models.Client.objects.all()
     context_object_name = "clients"
 
-class ClientDetailsView(DetailView):
+class ClientDetailsView(LoginRequiredMixin, DetailView):
     template_name = "details.html"
     queryset = models.Client.objects.all()
     context_object_name = "client"
 
-def table(request):
-    client = models.Client.objects.all()
-    context = {
-        "clients": client
-    }       
-    return render(request, "table.html", context)
    
-class CliendCreateView(CreateView):
+class CliendCreateView(LoginRequiredMixin, CreateView):
     template_name = "clients/create.html"
     form_class = ClientModelForm
 
@@ -49,7 +43,7 @@ class CliendCreateView(CreateView):
 
 
 
-class ClientUpdateView(UpdateView):
+class ClientUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "clients/update.html"
     form_class = ClientModelForm
     queryset = models.Client.objects.all()
@@ -58,7 +52,7 @@ class ClientUpdateView(UpdateView):
         return reverse("client:clients-list")
 
 
-class ClientDeleteView(DeleteView):
+class ClientDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "clients/delete.html"
     form_class = ClientModelForm
     queryset = models.Client.objects.all()
