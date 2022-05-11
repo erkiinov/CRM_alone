@@ -12,6 +12,14 @@ from django.db.models import Q
 
 # Create your views here.
 
+
+class SignupView(CreateView):
+    template_name = "registration/signup.html"
+    form_class = NewUserForm
+
+    def get_success_url(self):
+        return reverse("client:clients-list")
+
 class HomeView(TemplateView):
     template_name = "main.html"
 

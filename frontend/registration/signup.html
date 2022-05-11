@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} Signup {% endblock %}
+
+{% block content %}
+
+    <form method="post">
+        {% csrf_token %}
+    
+        <div class="flex border-t border-b mb-6 border-gray-200 py-2">
+            <span class="text-gray-500"></pan>
+            <span class="leading-relaxed mb-4" style="margin-left: 0%"> <div class="add_list"> {{ form.as_p }} </div> </pan>
+        </div> 
+    
+          <button style="margin: auto;" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">  <h2> Sign up</h2> </button>
+    </form>
+{% endblock %}
